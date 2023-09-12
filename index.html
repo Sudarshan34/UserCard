@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UserCard </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0; 
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: black;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            margin-top: 10px;
+            width: 700px;
+            margin-left: 400px;
+            border-radius: 15px;
+            border: 5px solid cyan;
+        }
+
+        form {
+            margin-top: 20px;
+            display: grid;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: bold;
+            color: cyan;
+        }
+
+        input {
+            padding: 5px;
+            width: 200px;
+            margin-left: 250px;
+            border-radius: 10px;
+            border: 3px solid cyan;
+        }
+
+        button {
+            background-color: cyan;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 300px;
+            margin-left: 200px;
+            margin-top: 10px;
+            border: 3px solid black;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+           
+            
+        }
+
+        .card {
+            background-color: white;
+            border: 2px solid black;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            margin: 10px;
+            text-align: left;
+            max-width: 300px;
+            border-radius: 10px;
+        
+        }
+
+    
+
+        h1{
+        color: cyan;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Card Project</h1>
+        <form id="userForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+            
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" required>
+            
+            <label for="village">Village:</label>
+            <input type="text" id="village" required>
+            
+            <label for="city">City:</label>
+            <input type="text" id="city" required>
+
+            <button type="submit">Create Card</button>
+        </form>
+    
+    </div>
+    <div class="card-container" id="cardContainer"></div>
+    <script>
+        const userForm = document.getElementById('userForm');
+        const cardContainer = document.getElementById('cardContainer');
+        const themeSelector = document.getElementById('theme');
+
+        userForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const village = document.getElementById('village').value;
+            const city = document.getElementById('city').value;
+
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.innerHTML = `
+                <h2>Name: ${name}</h2>
+                <p>Phone Number: ${phone}</p>
+                <p>Village: ${village}</p>
+                <p>City: ${city}</p>
+            `;
+
+            cardContainer.appendChild(card);
+
+            const userData = {
+                name,
+                phone,
+                village,
+                city
+            };
+            localStorage.setItem(name, JSON.stringify(userData));
+
+            userForm.reset();
+        });
+
+       
+    </script>
+</body>
+</html>
